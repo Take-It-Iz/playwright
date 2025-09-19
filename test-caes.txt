@@ -1,0 +1,119 @@
+			
+			TASK #1: CHECK IF THE ROOM CAN BE BOOKED WITH VALID DATA
+Preconditions: 
+-- Admin logged in with Admin's credentials 
+-- admin panel is opened on the "Rooms" page
+
+
+	Default values verification on "Create" button press
+TC-001:	Check default value of "Type" and "Accessible" fields.
+Steps: 
+-- open admin panel room creation form.	
+Expected result: "Type" field's default value is "Single" and "Accessible" field's default value is "false".
+
+
+	Input validation to create a room record
+TC-002:	Input all valid values to create a room record.
+Steps: 
+-- enter valid Room # (e.g., 101) 
+-- select one of "Type" values available 
+-- select "true" for "Accessible"
+-- select a "Price" value of either 100, 125, or 250 
+-- select all checkboxes in "Room details"
+-- click the "Create" button.
+Expected result: Room is created successfully.
+
+
+
+
+
+			TASK #2: CHECK IF THE ROOM CAN BE BOOKED WITH INVALID DATA
+Preconditions: 
+-- Admin logged in with Admin's credentials 
+-- admin panel is opened on the "Rooms" page
+-- all the fields values except the tested ones are valid by default.
+
+
+	"Room #" field invalid inputs
+TC-N001: "Room #" accepts alphanumeric.
+Steps: 
+-- enter alphanumeric value (e.g., "A101") 
+-- click the "Create" button.	
+Expected result: Room creation failed; validation error; room not created.
+
+TC-N002: "Room #" cannot be empty.
+Steps: 
+-- leave "Room #" empty 
+-- click the "Create" button.
+Expected result: Error message: "Room # cannot be empty"; room not created.
+
+TC-N003: "Room #" cannot accept special characters.
+Steps: 
+-- enter special chars (e.g., "#$%") 
+-- click the "Create" button.	
+Expected result: Validation error; room not created.
+
+TC-N004: "Room #" with mixture of digits and special chars.
+Steps: 
+-- enter "12#@" 
+-- click the "Create" button.	
+Expected result: Validation error; room not created.
+
+
+	"Price" field invalid inputs
+TC-N005: Leave "Price" empty.
+Steps: 
+-- leave "Price" empty 
+-- click the "Create" button.	
+Expected result: Error: "Price cannot be empty"; room not created.
+
+TC-N006: Enter price values outside of allowed values list.
+Steps: 
+-- input price 99, 130, 500 etc.  
+-- click the "Create" button.	
+Expected result: Validation error; room not created.
+
+TC-N007: Enter non-numeric price value.
+Steps: 
+-- input text like "one hundred" or special chars 
+-- click the "Create" button.	
+Expected result: Validation error; room not created.
+
+
+	"Room Details" field invalid options
+TC-N008: Leave empty "Room details" checkboxes.
+Steps: 
+-- leave all "Room details" unchecked 
+-- click the "Create" button.	
+Expected result: Error: "No features selected"; room successfully created.
+
+
+	Combination tests
+TC-N009: All mandatory fields empty.
+Steps: 
+-- leave "Room #", "Price" and "Room details" empty 
+-- click the "Create" button.	
+Expected result: Multiple validation errors; room not created.
+
+TC-N010: Multiple invalid values.
+Steps: 
+-- set "Room #" to "@#$123", "Price" to 99
+-- click the "Create" button.	
+Expected result: Multiple validation errors; room not created.
+
+
+
+
+			TASK #3: CHECK THAT THE EARLIER BOOKED DATES SHOW AS UNAVAILABLE
+Preconditions:
+-- start at the user page.
+
+
+TC-S001: Check the earlier booked dates status
+Steps: 
+-- open the main page
+-- go to "Check Availability & book Tour Stay" section
+-- select the "Check In" date 3 months prior to the date of testing
+-- select the "Check Out" date a week after the "Check In" date
+-- click the "Check Availability" button.
+Expected result: "Sorry, booking is unavailable in the selected time period" message; return to main page.
